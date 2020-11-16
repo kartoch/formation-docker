@@ -124,13 +124,13 @@ Démarrer un nouveau conteneur nginx en montant:
 
 > docker run --name sw -d
 --mount type=bind,source="$(pwd)"/nginx.conf,target=/etc/nginx/nginx.conf
---mount type=bind,source="$(pwd)"/html/,target=/usr/share/nginx/html 
+--mount type=bind,source="$(pwd)"/html/,target=/usr/share/nginx/html
 -p 8080:80 nginx
 
 ## TP9: montage de volumes dans NGINX
 
 Démarrer un conteneur busybox avec un volume monté en /html
-> docker run -it --mount source=html,target=/html busybox 
+> docker run -it --mount source=html,target=/html busybox
 
 Créer un fichier /html/index.html avec le message “HELLO WORLD !” dans le conteneur
 /# echo “HELLO WORLD” > /html/index.html
@@ -149,8 +149,8 @@ Lancer un conteneur NGINX en lecture seule, en montant :
 * Les répertoires nécessitant l’écriture en tmpfs (Attention à `/var/run/`, ce n’est pas un répertoire, c'est un lien vers `/run`)
 * Le volume créé dans le TP8 monté en /usr/share/nginx/html en lecture seule
 
-> docker run --name sw -d --read-only 
---mount type=tmpfs,destination=/run/  
+> docker run --name sw -d --read-only
+--mount type=tmpfs,destination=/run/
 --mount type=tmpfs,destination=/var/cache/nginx/
 --mount source=html,target=/usr/share/nginx/html,ro -p 8080:80 nginx
 
