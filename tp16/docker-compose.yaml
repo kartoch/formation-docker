@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  some-postgres:
+    image: "postgres:10"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  adminer:
+    image: "adminer"
+    ports:
+      - "8080:8080"
+  some-drupal:
+    image: "drupal:8-apache"
+    ports:
+      - "80:80"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}      
