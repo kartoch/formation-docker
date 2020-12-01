@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+
+  traefik:
+    image: "traefik:v2.3"
+    command:
+      - "--log.level=DEBUG"
+      - "--accesslog"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.exposedByDefault=false"
+      - "--providers.docker.network=traefik_default"
+      - "--providers.docker.defaultRule=Host(`example.com`)"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints:
+          - "node.role==manager"
+
+  whoami:
+    image: "traefik/whoami"
+    deploy:
+      placement:
+        constraints:
+          - "node.role!=manager"
+      labels:
+        - traefik.http.services.traefik-internal-whoami.loadbalancer.server.port=80
+        - traefik.enable=true
