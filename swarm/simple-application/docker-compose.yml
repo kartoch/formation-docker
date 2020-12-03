@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  web:
+    image: 192.168.99.103:5000/simpleapplication
+    build: app/
+    ports:
+      - "8000:8000"
+  redis:
+    image: redis:alpine
