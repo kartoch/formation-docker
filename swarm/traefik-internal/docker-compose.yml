@@ -31,3 +31,8 @@ services:
       labels:
         - traefik.http.services.traefik-internal-whoami.loadbalancer.server.port=80
         - traefik.enable=true
+
+networks:
+  default:
+    driver: overlay
+    attachable: true
