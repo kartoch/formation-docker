@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+
+  helloworld:
+    image: "alpine:3.6"
+    command: ["ping","www.docker.com"]
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 350M
+        reservations:
+          cpus: '0.1'
+          memory: 100M
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+
+  nginx:
+    image: "nginx:1.19"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 350M
+        reservations:
+          cpus: '0.1'
+          memory: 100M
+      replicas: 10
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: 
+          - "node.role == worker"
+        preferences:
+          - spread: node.labels.worker
+
+# docker node update --label-add worker=1 worker1
+# docker node update --label-add worker=2 worker2
