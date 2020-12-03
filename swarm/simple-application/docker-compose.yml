@@ -1,10 +1,14 @@
 version: "3.8"
 
 services:
+
   web:
-    image: 192.168.99.103:5000/simpleapplication
+    image: registry.gitlab.com/univlille/docker-c1-2020/sample-js:julien
     build: app/
     ports:
       - "8000:8000"
+    deploy:
+      replicas: 1
+
   redis:
     image: redis:alpine
