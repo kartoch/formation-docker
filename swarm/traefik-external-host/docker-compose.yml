@@ -10,12 +10,17 @@ services:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedByDefault=false"
-      - "--providers.docker.network=traefik-internal_default"
+      - "--providers.docker.network=traefik-external-host_default"
       - "--providers.docker.defaultRule=Host(`example.com`)"
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
-      replicas: 1
+      mode: global
       placement:
         constraints:
           - "node.role==manager"
@@ -23,15 +28,10 @@ services:
   whoami:
     image: "traefik/whoami"
     deploy:
-      replicas: 1    
+      replicas: 5
       placement:
         constraints:
           - "node.role!=manager"
       labels:
-        - traefik.http.services.traefik-internal-whoami.loadbalancer.server.port=80
+        - traefik.http.services.traefik-external-host-whoami.loadbalancer.server.port=80
         - traefik.enable=true
-
-networks:
-  default:
-    driver: overlay
-    attachable: true

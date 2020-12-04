@@ -11,6 +11,8 @@ Creating service traefik-external_whoami
 
 ### Test
 
+Une instance de traefik (un replica seulement par noeud et seulement sur le manager) + 5 instances de whoami.
+
 ```shell
 > curl --header "Host: example.com"  http://192.168.99.100:80/
 Hostname: b0dc376c36d2

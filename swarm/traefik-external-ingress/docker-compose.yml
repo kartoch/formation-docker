@@ -10,17 +10,17 @@ services:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedByDefault=false"
-      - "--providers.docker.network=traefik_default"
+      - "--providers.docker.network=traefik-external-ingress_default"
       - "--providers.docker.defaultRule=Host(`example.com`)"
     ports:
       - target: 80
         published: 80
         protocol: tcp
-        mode: host
+        mode: ingress
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
-      mode: global
+      replicas: 2
       placement:
         constraints:
           - "node.role==manager"
@@ -33,5 +33,5 @@ services:
         constraints:
           - "node.role!=manager"
       labels:
-        - traefik.http.services.traefik-external-whoami.loadbalancer.server.port=80
+        - traefik.http.services.traefik-external-ingress-whoami.loadbalancer.server.port=80
         - traefik.enable=true
