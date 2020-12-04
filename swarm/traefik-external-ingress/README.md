@@ -14,7 +14,7 @@ Creating service traefik-external-ingress_whoami
 2 instances de traefik + 5 instances de whoami
 
 ```shell
-❯ curl --header "Host: example.com"  http://192.168.99.108/
+> curl --header "Host: example.com"  http://192.168.99.108/
 Hostname: 52681dc30a17
 IP: 127.0.0.1
 IP: 10.0.4.11
@@ -31,8 +31,7 @@ X-Forwarded-Port: 80
 X-Forwarded-Proto: http
 X-Forwarded-Server: 2d3b3de7454b
 X-Real-Ip: 10.0.0.2
-
-❯ curl --header "Host: example.com"  http://192.168.99.108/
+> curl --header "Host: example.com"  http://192.168.99.108/
 Hostname: 66ff744c3680
 IP: 127.0.0.1
 IP: 10.0.4.9
@@ -49,6 +48,4 @@ X-Forwarded-Port: 80
 X-Forwarded-Proto: http
 X-Forwarded-Server: e3090d72fa38
 X-Real-Ip: 10.0.0.2
-
-
 ```

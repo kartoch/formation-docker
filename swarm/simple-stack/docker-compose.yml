@@ -37,6 +37,3 @@ services:
           - "node.role == worker"
         preferences:
           - spread: node.labels.worker
-
-# docker node update --label-add worker=1 worker1
-# docker node update --label-add worker=2 worker2
