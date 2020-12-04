@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+
+  just-a-test:
+    image: alpine:3
+    deploy:
+      replicas: 1
+    secrets:
+      - my_pass
+    command: ['cat', '/run/secrets/my_pass']
+
+secrets:
+  my_pass:
+    file: ./secret.txt
