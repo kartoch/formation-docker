@@ -1,0 +1,7 @@
+version: "3.8"  
+
+services:
+  my_ubuntu:
+    build:
+      context: ./build
+    command: ping -c 5 www.google.fr
