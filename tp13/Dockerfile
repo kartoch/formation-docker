@@ -7,4 +7,3 @@ ADD hello.py /home/hello.py
 ADD static /home/static
 ENV FLASK_APP=hello.py
 WORKDIR /home
-

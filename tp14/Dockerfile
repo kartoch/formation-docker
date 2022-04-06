@@ -9,9 +9,10 @@ ADD hello.py /home/hello.py
 ADD static /home/static
 RUN echo "${MY_NAME}" > /home/static/name.txt
 WORKDIR /home
-CMD ["/usr/bin/python3", "hello.py"]
-HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:5000/healthz || exit 1
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+HEALTHCHECK --interval=10s --timeout=3s CMD curl -f http://localhost:5000/healthz || exit 1
 VOLUME /home/static/
-ENV FLASK_APP=hello.py
+ENV FLASK_ENV="development"
+ENV FLASK_APP="hello.py"
 USER 1000
 EXPOSE 5000

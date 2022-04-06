@@ -21,12 +21,8 @@ def hello_world():
     <title>Hello world</title>
   </head>
   <body>
-     Hello World !!!!<br/>
+     Hello World Yolo !!!!<br/>
      <img src="static/flask.png"> 
   </body>
 </html>
 """
-
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
